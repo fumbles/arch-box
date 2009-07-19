@@ -1,0 +1,11 @@
+background no
+update_interval 2.0
+out_to_console yes
+no_buffers yes
+out_to_x no
+text_buffer_size 600
+mpd_host localhost
+mpd_port 6600
+
+TEXT
+  ^fg(dark orange)^i(/home/daniel/.xmonad/Icons/arch_10x10.xbm)^fg(grey40)rch^fg(white)(^fg(dark orange)daniel^fg(white)) ^fg(blue)| ^fg(orange)^i(/home/daniel/.xmonad/Icons/clock.xbm) ^fg(cyan)${execi 2 /home/daniel/bin/pythkilos.py} ^fg(dark orange)^p(;+7)^r(5x5)^p(+2;-7) ^fg(cyan)${time %H:%M} ^fg(blue)| ^fg(cyan)${time %d %b %Y}  

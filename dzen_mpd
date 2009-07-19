@@ -1,0 +1,36 @@
+#!/bin/sh
+#
+#
+#
+# (c) 2007, by Jochen Schweizer
+# with help from Robert Manea
+ 
+FN='-*-terminus-bold-r-normal-*-12-*-*-*-*-*-*-*'
+BG=black      #'#333333'
+FG='#FFFFFF'
+W=410
+X=750
+Y=0        #885
+GH=6
+GW=45
+GFG=orange    #'#a8a3f7'
+GBG='#111'
+FW="mpc seek +5"      # 5 sec forwards
+RW="mpc seek -5"      # 5 sec backwards
+#NEXTS="mpc next"      # previous song
+#PREVS="mpc prev"      # next song
+#TOGGS="mpc toggle"    # play/pause
+ 
+CAPTION="^fg(dark orange)^i(/home/daniel/.xmonad/Icons/music.xbm)"
+ 
+MAXPOS="100"
+ 
+while true; do
+  POS=`mpc | sed -ne 's/^.*(\([0-9]*\)%).*$/\1/p'`
+  POSM="$POS $MAXPOS"
+  echo -n "$CAPTION "
+  echo "`mpc | sed -n '1p'`" | tr '\n' ' '
+  echo "$POSM" | gdbar -h $GH -w $GW -fg $GFG -bg $GBG
+  sleep 1 
+done | dzen2 -p 60  -tw $W -x 1010 -y 0 -fg $FG -bg $BG -fn $FN -h 14 -ta l -e "button4=exec:$RW;button5=exec:$FW"
+

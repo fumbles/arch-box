@@ -1,0 +1,22 @@
+
+#!/bin/sh
+#
+#simple display of info Archlinux (kernel) and hostname plus arch icon
+#made by Daniel Riggins 
+
+BG='#000'  # dzen backgrounad
+FG='#999'  # dzen foreground
+W=75     # width of the dzen bar
+GW=50      # width of the gauge
+GFG='#999'  # color of the gauge
+GH=7       # height of the gauge
+GBG='#333'  # color of gauge background
+X=950       # x position
+Y=0    # y position
+FN='-*-*-*-*-*-*-13-*-*-*-*-*-iso10646-*'  
+
+while true; do
+ echo "^fg(dark orange) Archlinux ^fg(dark red) 2.6.30 ^fg(blue) Daniel@arch^fg(cyan)  ^i(/home/daniel/.xmonad/Icons/arch_10x10.xbm)"
+ sleep 360000 
+done | dzen2 -ta c -tw 415 -y 0 -x 1180 -fg $FG -bg $BG -fn $FN
+

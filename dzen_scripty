@@ -1,0 +1,21 @@
+#!/bin/bash
+# 
+
+
+# dzen menu script
+
+# direcory with execs
+TAG='(2x17)'
+TAG1='(5x2)'
+ICON='(/home/daniel/.xmonad/Icons/arch_10x10.xbm)'
+DIR='/home/daniel/bin/dzen/'
+COUNT=$(expr `ls $DIR | wc -l` - 1) && [ $COUNT -gt 30 ] && COUNT=30                                                                                  
+
+(echo ^i$ICON;
+ for i in $(ls $DIR); do
+     echo " "^r$TAG^r$TAG1 $i
+ done 
+) \
+| dzen2 -y 783 -ta c -sa l -tw 30 -w 95 -bg '#9ab8c2' -fg '#44434f' -fn '-*-terminus-bold-r-normal-*-12-*-*-*-*-*-*' -p -l $COUNT -m \
+  -e 'button3=togglecollapse;leaveslave=collapse;button4=scrollup;button5=scrolldown;button1=menuprint' \
+| while read FNAME; do "$DIR$FNAME"; done

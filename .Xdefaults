@@ -1,0 +1,94 @@
+!------------------!
+! XFT !
+!------------------!
+ 
+Xft*dpi: 99
+Xft*antialias: true
+Xft*hinting: true
+Xft*hintstyle: hintfull
+Xft*rgba: rgb
+ 
+!------------------!
+! URvxt Stuff !
+!------------------!
+ 
+!--[term name]--!
+!URxvt*termName: rxvt-256color
+URxvt*termName: rxvt-unicode
+urxvt.urgentOnBell: true
+
+ 
+!--[trans and fg/bg]--!
+URxvt*fadeColor: black
+URxvt*transparent: false
+URxvt*shading: 25
+URxvt*depth:24
+!URxvt*background: #000000
+!URxvt*foreground: #C7C7C7
+URxvt*borderless: 1
+ 
+!--[font]--!
+!URxvt*font: xft:terminus:pixelsize=16
+!URxvt*boldFont: xft:terminus:pixelsize=16
+URxvt*font:      xft:Bitstream Vera Sans Mono:pixelsize=12
+!URxvt*font: 
+!URxvt*font: xft::pixelsize=12
+!URxvt*boldFont:      xft:Bitstream Vera Sans Mono:pixelsize=16:bold:autohint=true
+!URxvt*italicFont:    xft:DejaVu Sans Mono:pixelsize=16:italic:autohint=true
+URxvt*boldItalicFont:    xft:DejaVu Sans Mono:pixelsize=16:bold:italic:autohint=true
+ 
+!--[scrolling]--!
+URxvt*scrollBar: false
+URxvt*saveLines: 10000
+ 
+!--[tabs]--!
+!URxvt*perl-ext-common: default,tabbed
+URxvt*perl-lib: /usr/lib/urxvt/perl/
+URxvt*perl-ext-common: default,matcher,searchable-scrollback
+URxvt*urlLauncher: /usr/bin/firefox
+URxvt*matcher.button: 1
+URxvt*matcher.pattern.1: \\bwww\\.[\\w-]+\\.[\\w./?&@#-]*[\\w/-]
+URxvt*keysym.C-u: perl:matcher
+
+!--[cursor]--!
+URxvt*cursorBlink: true
+ 
+!--[Colours]--!
+URxvt*cursorColor: #FFAF00
+ 
+URxvt*background: #222222
+URxvt*foreground: #cacaca
+!dcdccc
+!Black
+*color0: #101010
+!DarkRed
+*color1: #8e2d10
+!DarkGreen
+!*color2: #5a7e2c
+!DarkYellow
+*color3: #b88b10
+!DarkBlue
+*color4: #2797d8
+!DarkMagenta
+*color5: #8e3d9d
+!DarkCyan
+*color6: #418179
+!LightGray
+*color7: #bebebe
+!DarkGray
+*color8: #757575
+!Red
+*color9: #cc4a0e
+!Green
+*color10: #9cbF4b
+!Yellow
+*color11: #ffc100
+!Blue
+*color12: #86cdea
+!Magenta
+*color13: #b954cb
+!Cyan
+*color14: #71bebe
+!White
+*color15: #ffffff
+

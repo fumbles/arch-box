@@ -38,10 +38,13 @@ import XMonad.Layout.Spiral
 import XMonad.Layout.Grid
 import qualified XMonad.Layout.Magnifier as Mag
 import XMonad.Layout.SimpleFloat
+import XMonad.Layout.SimplestFloat
 import XMonad.Layout.WindowArranger
 import XMonad.Layout.LayoutModifier
 import XMonad.Util.EZConfig   
 import XMonad.Layout.Gaps
+import XMonad.Layout.Reflect
+import XMonad.Layout.PerWorkspace
 ------------------------------------------------------------------------------- 
 -- Main --
 main = do
@@ -130,9 +133,11 @@ workspaces' :: [WorkspaceId]
 workspaces' = ["IRC","INTERWEBS","Cal","CODE I","CODE II","Torrent","MUSIC"]
  
 -- layouts
-customLayout =  avoidStruts $ smartBorders Circle ||| tiled ||| Accordion ||| spiral (1 % 1) ||| Mag.magnifier Grid  ||| smartBorders (Mirror tiled) 
+customLayout =  smartBorders . avoidStruts $ funkyhack  lays
   where
     tiled = ResizableTall 1 (2/100) (1/2) []
+    funkyhack = onWorkspaces ["IRC","Cal"] (simplestFloat ||| Mirror tiled ||| Full)
+    lays = spiral (1 % 1) ||| smartBorders Circle ||| tiled ||| Mirror tiled ||| Mag.magnifier Grid ||| smartBorders (Mirror tiled) ||| (reflectHoriz tiled)
   
   
  

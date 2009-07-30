@@ -49,11 +49,9 @@ import XMonad.Layout.NoBorders
 ------------------------------------------------------------------------------- 
 -- Main --
 main = do
-              pipe1 <- spawnPipe "dzen2 -bg black -fg red -ta l -w 523 -h 14" 
+              pipe1 <- spawnPipe "dzen2 -bg black -fg red -ta l -w 523 -h 20" 
               conkyBarPipe <- spawnPipe myConkyBar
 	      conkyBarPipe2 <-spawnPipe myConkyBar2
-              --vertbar <- spawnPipe myVertBar
-	     -- testbar <- spawnPipe "sleep 1 && ~/Desktop/wtf/arch_update.py | dzen2 -fn '-*-terminus-*-*-*-*-12-*-*-*-*-*-iso8859' -bg black  -fg white -x 450 -y 0 -w 350 -h 16 -ta l -e ''"
               mpdpipe <- spawnPipe "~/dzen_mpd"
 	      xmonad $ withUrgencyHook dzenUrgencyHook defaultConfig {
               workspaces = workspaces'
@@ -65,10 +63,10 @@ main = do
               , keys = keys' 
               , layoutHook = layoutHook'
               , manageHook = manageHook' 
-              , logHook = dynamicLogWithPP $ defaultPP
+              , logHook = dynamicLogWithPP $ defaultPP 
           {
           ppCurrent           = wrap (dzfg "dark orange" box) "" . dzenColor "#AA9DCF" "#333" . pad
-          , ppOutput          = hPutStrLn pipe1
+          , ppOutput          = hPutStrLn pipe1 
           , ppVisible         = dzfg "#AA9DCF" 
           , ppHidden          = wrap (dzfg "white" emptybox) "" . dzfg "#AA9DCF"
           , ppHiddenNoWindows = const ""
@@ -90,15 +88,11 @@ main = do
 ------------------------------------------------------------------------------
 -- conky-
 myConkyBar :: String
-myConkyBar = "sleep 1 && conky -c ~/.conkyrc1 | dzen2 -fn '-*-terminus-*-*-*-*-12-*-*-*-*-*-iso8859' -bg black  -fg white -x 0 -y 884 -w 350 -h 16 -ta l -e '' "
+myConkyBar = "sleep 1 && conky -c ~/.conkyrc1 | dzen2 -fn '-*-terminus-*-*-*-*-12-*-*-*-*-*-iso8859' -bg black  -fg white -x 0 -y 880 -w 350 -h 20 -ta l -e '' "
 
 myConkyBar2 :: String
-myConkyBar2 = "sleep 1 && conky -c ~/.conkyrc2 | dzen2 -fn '-*-terminus-*-*-*-*-12-*-*-*-*-*-iso8859' -bg black -fg white -x 449 -y 885 -w 850 -h 15 -ta l -e ''"
+myConkyBar2 = "sleep 1 && conky -c ~/.conkyrc2 | dzen2 -fn '-*-terminus-*-*-*-*-12-*-*-*-*-*-iso8859' -bg black -fg white -x 480 -y 880 -w 850 -h 20 -ta l -e ''"
 
---myVertBar :: String
---myVertBar = "gcpubar -fg '#aecf96' -bg 'gray40' -h 200 -w 20 | dzen2 -ta l -w 22 -h 500 -bg '#000000' -fg 'grey70' -fn '-*-terminus-*-*-*-*-12-*-*-*-*-*-iso8859' -p -m v -l 4 -e ''"
---myVertBar = "dzen2 -ta l -w 22 -h 900 -bg 'gray40' -fg 'cyan' -fn '-*-terminus-*-*-*-*-12-*-*-*-*-*-iso8859' -m -l 3-e  '' "
-  
 myXPConfig = defaultXPConfig
     {
   font = "-*-terminus-*-*-*-*-12-*-*-*-*-*-*-u"

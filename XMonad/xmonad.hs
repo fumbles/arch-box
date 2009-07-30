@@ -45,10 +45,11 @@ import XMonad.Util.EZConfig
 import XMonad.Layout.Gaps
 import XMonad.Layout.Reflect
 import XMonad.Layout.PerWorkspace
+import XMonad.Layout.NoBorders
 ------------------------------------------------------------------------------- 
 -- Main --
 main = do
-              pipe1 <- spawnPipe "dzen2 -bg 'black' -fg red -ta l -w 523 -h 14" 
+              pipe1 <- spawnPipe "dzen2 -bg black -fg red -ta l -w 523 -h 14" 
               conkyBarPipe <- spawnPipe myConkyBar
 	      conkyBarPipe2 <-spawnPipe myConkyBar2
               --vertbar <- spawnPipe myVertBar
@@ -66,7 +67,7 @@ main = do
               , manageHook = manageHook' 
               , logHook = dynamicLogWithPP $ defaultPP
           {
-          ppCurrent           = wrap (dzfg "dark orange" box) "" . dzenColor "#AA9DCF" ""
+          ppCurrent           = wrap (dzfg "dark orange" box) "" . dzenColor "#AA9DCF" "#333" . pad
           , ppOutput          = hPutStrLn pipe1
           , ppVisible         = dzfg "#AA9DCF" 
           , ppHidden          = wrap (dzfg "white" emptybox) "" . dzfg "#AA9DCF"
@@ -92,7 +93,7 @@ myConkyBar :: String
 myConkyBar = "sleep 1 && conky -c ~/.conkyrc1 | dzen2 -fn '-*-terminus-*-*-*-*-12-*-*-*-*-*-iso8859' -bg black  -fg white -x 0 -y 884 -w 350 -h 16 -ta l -e '' "
 
 myConkyBar2 :: String
-myConkyBar2 = "sleep 1 && conky -c ~/.conkyrc2 | dzen2 -fn '-*-terminus-*-*-*-*-12-*-*-*-*-*-iso8859' -bg black  -fg white -x 449 -y 885 -w 850 -h 15 -ta l -e ''"
+myConkyBar2 = "sleep 1 && conky -c ~/.conkyrc2 | dzen2 -fn '-*-terminus-*-*-*-*-12-*-*-*-*-*-iso8859' -bg black -fg white -x 449 -y 885 -w 850 -h 15 -ta l -e ''"
 
 --myVertBar :: String
 --myVertBar = "gcpubar -fg '#aecf96' -bg 'gray40' -h 200 -w 20 | dzen2 -ta l -w 22 -h 500 -bg '#000000' -fg 'grey70' -fn '-*-terminus-*-*-*-*-12-*-*-*-*-*-iso8859' -p -m v -l 4 -e ''"
@@ -136,7 +137,7 @@ workspaces' = ["IRC","INTERWEBS","Cal","CODE I","CODE II","Torrent","MUSIC"]
 customLayout =  smartBorders . avoidStruts $ funkyhack  lays
   where
     tiled = ResizableTall 1 (2/100) (1/2) []
-    funkyhack = onWorkspaces ["IRC","Cal"] (simplestFloat ||| Mirror tiled ||| Full)
+    funkyhack = onWorkspaces ["IRC","Cal"] (noBorders $ simplestFloat |||  Mirror tiled ||| Full)
     lays = spiral (1 % 1) ||| smartBorders Circle ||| tiled ||| Mirror tiled ||| Mag.magnifier Grid ||| smartBorders (Mirror tiled) ||| (reflectHoriz tiled)
   
   

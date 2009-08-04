@@ -28,19 +28,22 @@ URxvt*depth:24
 URxvt*borderless: 1
  
 !--[font]--!
-!URxvt*font: xft:terminus:pixelsize=16
-!URxvt*boldFont: xft:terminus:pixelsize=16
+!URxvt*font: xft:terminus:pixelsize=12
+!URxvt*boldFont: xft:terminus:pixelsize=12
 URxvt*font:      xft:Bitstream Vera Sans Mono:pixelsize=12
 !URxvt*font: 
 !URxvt*font: xft::pixelsize=12
 !URxvt*boldFont:      xft:Bitstream Vera Sans Mono:pixelsize=16:bold:autohint=true
 !URxvt*italicFont:    xft:DejaVu Sans Mono:pixelsize=16:italic:autohint=true
 URxvt*boldItalicFont:    xft:DejaVu Sans Mono:pixelsize=16:bold:italic:autohint=true
- 
+!URxvt*font:  xft:Dina:pixelsize=10
+!URxvt*boldFont: xft:Dina:pixelsize=10
+
 !--[scrolling]--!
 URxvt*scrollBar: false
 URxvt*saveLines: 10000
- 
+URxvt.imLocale:  en_US.UTF-8 
+
 !--[tabs]--!
 !URxvt*perl-ext-common: default,tabbed
 URxvt*perl-lib: /usr/lib/urxvt/perl/
@@ -60,35 +63,36 @@ URxvt*background: #222222
 URxvt*foreground: #cacaca
 !dcdccc
 !Black
-*color0: #101010
+!*color0: #101010
 !DarkRed
-*color1: #8e2d10
+!*color1: #8e2d10
 !DarkGreen
-!*color2: #5a7e2c
+!!*color2: #5a7e2c
 !DarkYellow
-*color3: #b88b10
+!*color3: #b88b10
 !DarkBlue
-*color4: #2797d8
+!*color4: #2797d8
 !DarkMagenta
-*color5: #8e3d9d
+!*color5: #8e3d9d
 !DarkCyan
-*color6: #418179
+!*color6: #418179
 !LightGray
-*color7: #bebebe
+!*color7: #bebebe
 !DarkGray
-*color8: #757575
+!*color8: #757575
 !Red
-*color9: #cc4a0e
+!*color9: #cc4a0e
 !Green
-*color10: #9cbF4b
+!*color10: #9cbF4b
 !Yellow
-*color11: #ffc100
+!*color11: #ffc100
 !Blue
-*color12: #86cdea
+!*color12: #86cdea
 !Magenta
-*color13: #b954cb
+!*color13: #b954cb
 !Cyan
-*color14: #71bebe
+!*color14: #71bebe
 !White
-*color15: #ffffff
+!*color15: #ffffff
 
+  

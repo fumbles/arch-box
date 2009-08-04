@@ -24,6 +24,11 @@ import XMonad.Prompt.Shell
 import XMonad.Prompt
 import XMonad.Actions.SpawnOn
 import XMonad.Actions.CycleWS
+import XMonad.Util.Scratchpad (scratchpadSpawnAction, scratchpadManageHook, scratchpadFilterOutWorkspace)
+import qualified XMonad.Actions.Search as S
+import XMonad.Actions.Search
+import qualified XMonad.Actions.Submap as SM
+
 -- hooks
 import XMonad.Hooks.ManageDocks
 import XMonad.Hooks.DynamicLog
@@ -46,13 +51,14 @@ import XMonad.Layout.Gaps
 import XMonad.Layout.Reflect
 import XMonad.Layout.PerWorkspace
 import XMonad.Layout.NoBorders
+import XMonad.Layout.Tabbed
 ------------------------------------------------------------------------------- 
 -- Main --
 main = do
-              pipe1 <- spawnPipe "dzen2 -bg black -fg red -ta l -w 523 -h 20" 
-              conkyBarPipe <- spawnPipe myConkyBar
-	      conkyBarPipe2 <-spawnPipe myConkyBar2
-              mpdpipe <- spawnPipe "~/dzen_mpd"
+             -- pipe1 <- openFile "/home/daniel/dmpipe" WriteMode  
+              pipe1 <- spawnPipe "dzen2 -bg black -fg red -ta l -w 920 -h 20 "
+	      mpdpipe <- spawnPipe "~/dzen_mpd"
+	      conkyBarPipe <- spawnPipe myConkyBar
 	      xmonad $ withUrgencyHook dzenUrgencyHook defaultConfig {
               workspaces = workspaces'
               , modMask = modMask'
@@ -67,14 +73,14 @@ main = do
           {
           ppCurrent           = wrap (dzfg "dark orange" box) "" . dzenColor "#AA9DCF" "#333" . pad
           , ppOutput          = hPutStrLn pipe1 
-          , ppVisible         = dzfg "#AA9DCF" 
+	  , ppVisible         = dzfg "#AA9DCF" 
           , ppHidden          = wrap (dzfg "white" emptybox) "" . dzfg "#AA9DCF"
           , ppHiddenNoWindows = const ""
           , ppLayout          = dzfg "#6B6382" 
           , ppSep             = " "  
           , ppWsSep           = dzfg "orange"  " " 
           , ppUrgent          = dzenColor "#212121"  "*"
-          , ppTitle           = const ""
+          , ppTitle           = dzenColor "cyan"  "" . trim 
           }
 }
           where  dzfg c      = dzenColor c ""
@@ -82,16 +88,16 @@ main = do
                  box = "^p(;+7)^r(5x5)^p(+2;-7)"
  
          
-
-              
+mpd :: String
+mpd = "~/dzen_mpd"
 
 ------------------------------------------------------------------------------
 -- conky-
 myConkyBar :: String
-myConkyBar = "sleep 1 && conky -c ~/.conkyrc1 | dzen2 -fn '-*-terminus-*-*-*-*-12-*-*-*-*-*-iso8859' -bg black  -fg white -x 0 -y 880 -w 350 -h 20 -ta l -e '' "
+myConkyBar = "sleep 1 && conky -c ~/.conkyrc1 | dzen2 -fn '-*-terminus-*-*-*-*-12-*-*-*-*-*-iso8859' -bg black  -fg white -x 0 -y 880 -w 1500 -h 20 -ta l -e '' "
 
-myConkyBar2 :: String
-myConkyBar2 = "sleep 1 && conky -c ~/.conkyrc2 | dzen2 -fn '-*-terminus-*-*-*-*-12-*-*-*-*-*-iso8859' -bg black -fg white -x 480 -y 880 -w 850 -h 20 -ta l -e ''"
+--myConkyBar2 :: String
+--myConkyBar2 = "sleep 1 && conky -c ~/.conkyrc2 | dzen2 -fn '-*-terminus-*-*-*-*-12-*-*-*-*-*-iso8859' -bg black -fg white -x 480 -y 880 -w 850 -h 20 -ta l -e ''"
 
 myXPConfig = defaultXPConfig
     {
@@ -107,7 +113,18 @@ myXPConfig = defaultXPConfig
 -------------------------------------------------------------------------------
 -- Hooks -- 
 manageHook' :: ManageHook 
-manageHook' = composeAll [ (doF W.swapDown), (isFullscreen --> doFullFloat), manageHook defaultConfig, manageDocks , className =? "OpenOffice.org 3.1" --> doShift "CODE II", className =? "Gimp"  --> doFloat, className =? "Gran Paradiso"  --> doShift "INTERWEBS", className =? "Shiretoko"  --> doShift "INTERWEBS", className =? "VLC (XVideo output)"    --> doCenterFloat           ]
+manageHook' = composeAll [ (doF W.swapDown) 
+            , (isFullscreen --> doFullFloat)
+	    , manageHook defaultConfig
+	    , manageDocks 
+	    , className =? "OpenOffice.org 3.1"   --> doShift "CODE II"
+	    , className =? "Gimp"                 --> doFloat
+	    , className =? "Shiretoko"            --> doShift "INTERWEBS"
+	    , className =? "VLC (XVideo output)"  --> doCenterFloat 
+	    , title     =? "Save a Bookmark"      --> doFloat
+	    , title     =? "Add-ons"              --> doFloat
+	    , className =? "Transmission"         --> doShift "Torrent"
+	    ]
 
 layoutHook' = customLayout 
 -------------------------------------------------------------------------------
@@ -125,17 +142,42 @@ focusedBorderColor' = "#3579A8"
  
 -- workspaces
 workspaces' :: [WorkspaceId]
-workspaces' = ["IRC","INTERWEBS","Cal","CODE I","CODE II","Torrent","MUSIC"]
+workspaces' = ["IRC","INTERWEBS","Cal","CODE I","CODE II","TORRENT","MUSIC"]
+
+
+
+
+
+--Search engines to be selected : [google (g), wikipedia (w) , youtube (y) , maps (m), dictionary (d) , wikipedia (w), bbs (b) ,aur (r), wiki (a) , TPB (t), mininova (n), isohunt (i) ]
+--keybinding: hit mod + s + <searchengine>
+
+searchEngineMap method = M.fromList $
+       [ ((0, xK_g), method S.google )
+       , ((0, xK_y), method S.youtube )
+       , ((0, xK_m), method S.maps    )
+       , ((0, xK_d), method S.dictionary )
+       , ((0, xK_w), method S.wikipedia )
+       , ((0, xK_b), method $ S.searchEngine "archbbs" "http://bbs.archlinux.org/search.php?action=search&keywords=")
+       , ((0, xK_r), method $ S.searchEngine "AUR" "http://aur.archlinux.org/packages.php?O=0&L=0&C=0&K=")
+       , ((0, xK_a), method $ S.searchEngine "archwiki" "http://wiki.archlinux.org/index.php/Special:Search?search=")
+	, ((0, xK_p), method $ S.searchEngine "thepiratebay" "http://thepiratebay.org/search/" )
+        , ((0, xK_n), method $ S.searchEngine "mininova" "http://www.mininova.org/search" )
+	, ((0, xK_i), method $ S.searchEngine "isohunt" "http://www.isohunt.com/" )
+        ]
  
 -- layouts
 customLayout =  smartBorders . avoidStruts $ funkyhack  lays
   where
     tiled = ResizableTall 1 (2/100) (1/2) []
-    funkyhack = onWorkspaces ["IRC","Cal"] (noBorders $ simplestFloat |||  Mirror tiled ||| Full)
+    funkyhack = onWorkspaces ["IRC"] (tabbed shrinkText myTheme |||  Mirror tiled ||| Full)
     lays = spiral (1 % 1) ||| smartBorders Circle ||| tiled ||| Mirror tiled ||| Mag.magnifier Grid ||| smartBorders (Mirror tiled) ||| (reflectHoriz tiled)
   
-  
- 
+myTheme = defaultTheme { decoHeight = 16
+                        , activeColor = "#a6c292"
+		        , activeBorderColor = "#a6c292"
+			, activeTextColor = "#000000"
+	                , inactiveBorderColor = "#000000"
+		        }
 ------------------------------------------------
 -- Terminal --
 terminal' :: String
@@ -154,16 +196,17 @@ keys' conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
         --terminal
     [ ((modMask,               xK_Return), spawn $ XMonad.terminal conf) 
     , ((modMask .|. shiftMask, xK_p     ), shellPrompt myXPConfig)
+    , ((modMask ,                  xK_s ), SM.submap $ searchEngineMap $ S.promptSearch myXPConfig)
+    , ((modMask .|. shiftMask , xK_s ), SM.submap $ searchEngineMap $ S.selectSearch)
     , ((modMask .|. shiftMask, xK_a	), spawn "urxvt -e alsamixer")
     , ((modMask .|. shiftMask, xK_m	), spawn "urxvt  -e ncmpcpp")
     , ((modMask .|. shiftMask, xK_f	), spawn "firefox")
   , ((modMask .|. shiftMask, xK_t	), spawn "thunar")
     , ((controlMask .|. mod1Mask, xK_l), spawn "gnome-screensaver-command --lock")
     , ((modMask .|. shiftMask, xK_g	), spawn "gedit")
-    , ((modMask .|. shiftMask, xK_s	), spawn "urxvt -e /home/daniel/bin/ssinfo.pl")
+    , ((modMask .|. shiftMask, xK_a	), spawn "urxvt -e /home/daniel/bin/ssinfo.pl")
     , ((0, 		       xK_Print	), spawn "scrot")
     , ((controlMask .|. modMask, xK_g	), spawn "/home/daniel/bin/goodsong")
-    , ((modMask                , xK_p   ), spawn  "exec `dmenu_path | yeganesh -- -nb black -nf orange -b -fn terminus`")
 	--Volume controls
      , ((modMask 		, xK_Prior), spawn "amixer sset Master 1+")
      , ((modMask		, xK_Next), spawn "amixer sset Master 1-")

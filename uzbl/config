@@ -1,0 +1,85 @@
+# Handlers
+set download_handler = spawn /home/daniel/.config/uzbl/scripts/download.sh
+set cookie_handler = spawn /home/daniel/.config/uzbl/scripts/cookies.py
+set new_window = sh 'uzbl -u $8' # equivalent to the default behaviour
+set load_start_handler = set status_message = <span foreground="khaki">wait</span>
+set load_commit_handler = set status_message = <span foreground="green">recv</span>
+set load_finish_handler = set status_message = <span foreground="gold">done</span>
+ 
+ 
+ 
+# Behaviour and appearance
+set show_status = 1
+set status_background = #303030
+set status_format = <span font_family="monospace"><span background="khaki" foreground="black">[\@[\@MODE]\@]</span> [<span weight="bold" foreground="red">\@[\@keycmd]\@</span>] <span foreground="#606060"> \@[\@LOAD_PROGRESSBAR]\@ </span><span foreground="#99FF66">\@[\@uri]\@</span> <span foreground="khaki">\@[\@NAME]\@</span> <span foreground="orange">\@status_message</span><span foreground="#606060"> \@[\@SELECTED_URI]\@</span></span>
+set status_top = 0
+set insert_indicator = I
+set command_indicator = C
+set useragent = Uzbl (Webkit @WEBKIT_MAJOR.@WEBKIT_MINOR.@WEBKIT_MICRO) (@(uname -s)@ @(uname -n)@ @(uname -r)@ @(uname -v)@ @(uname -m)@ [@ARCH_UZBL]) (Commit @COMMIT)
+ 
+set fifo_dir = /tmp
+set socket_dir = /tmp
+set shell_cmd = sh -c
+ 
+# Keyboard interface
+set modkey = Mod1
+# like this you can enter any command at runtime, interactively. prefixed by ':'
+bind :_ = chain '%s'
+ 
+bind j = scroll_vert 20
+bind k = scroll_vert -20
+bind h = scroll_horz -20
+bind l = scroll_horz 20
+bind gg = scroll_begin
+bind G = scroll_end
+bind H = back
+bind m = forward
+bind S = stop
+bind r = reload
+bind R = reload_ign_cache
+bind zi = zoom_in
+bind zo = zoom_out
+bind T = toggle_zoom_type
+bind 1 = sh "echo set zoom_level = 1.0 > $4"
+bind 2 = sh "echo set zoom_level = 2.0 > $4"
+#bind b = toggle_status
+bind /* = search %s
+bind ?* = search_reverse %s
+ 
+#jump to next
+bind n = search
+bind N = search_reverse
+bind wiki = uri http://archlinux.org
+ 
+# shortcut to set the uri.
+bind o _ = uri %s
+ 
+# shortcut to set variables
+bind s _ = set %s
+bind wiki _ = uri http://wiki.archlinux.org/index.php/Special:Search?search=%s&go=Go
+bind go _ = uri http://www.google.com/search?q=%s
+bind bbs _ = uri http://bbs.archlinux.org/search.php?action=search&keywords=
+bind i = toggle_insert_mode
+ 
+# disable insert mode (1 to enable). note that Esc works to disable, regardless of this setting
+bind I = toggle_insert_mode 0
+#Focus the first form input and enter insert mode
+bind gi = script /home/daniel/.config/uzbl/scripts/go_input.js
+ 
+# does the same as yurl but without needing a script
+bind yy = sh 'echo -n $6 | xclip'
+# go the page from primary selection
+bind p = sh 'echo "uri `xclip -selection primary -o`" > $4'
+# go to the page in clipboard
+bind P = sh 'echo "uri `xclip -selection clipboard -o`" > $4'
+# start a new uzbl instance from the page in primary selection
+bind 'p = sh 'exec uzbl --uri $(xclip -o)'
+bind d = exit
+ 
+bind !dump = sh "echo dump_config > $4"
+bind !reload = sh 'cat $1 > $4'
+ 
+# FOLLOW LINK PART
+bind f* = script /home/daniel/.config/uzbl/scripts/follow_Numbers.js %s
+bind F* = script /home/daniel/.config/uzbl/scripts/follow_NumbersTab.js %s
+ 

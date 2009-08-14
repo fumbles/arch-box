@@ -54,8 +54,7 @@ import XMonad.Layout.NoBorders
 import XMonad.Layout.Tabbed
 ------------------------------------------------------------------------------- 
 -- Main --
-main = do
-             -- pipe1 <- openFile "/home/daniel/dmpipe" WriteMode  
+main = do 
               pipe1 <- spawnPipe "dzen2 -bg black -fg red -ta l -w 920 -h 20 "
 	      mpdpipe <- spawnPipe "~/dzen_mpd"
 	      conkyBarPipe <- spawnPipe myConkyBar
@@ -86,18 +85,11 @@ main = do
           where  dzfg c      = dzenColor c ""
                  emptybox = "^p(;+7)^ro(5x5)^p(+2;-7)"
                  box = "^p(;+7)^r(5x5)^p(+2;-7)"
- 
-         
-mpd :: String
-mpd = "~/dzen_mpd"
 
 ------------------------------------------------------------------------------
 -- conky-
 myConkyBar :: String
 myConkyBar = "sleep 1 && conky -c ~/.conkyrc1 | dzen2 -fn '-*-terminus-*-*-*-*-12-*-*-*-*-*-iso8859' -bg black  -fg white -x 0 -y 880 -w 1500 -h 20 -ta l -e '' "
-
---myConkyBar2 :: String
---myConkyBar2 = "sleep 1 && conky -c ~/.conkyrc2 | dzen2 -fn '-*-terminus-*-*-*-*-12-*-*-*-*-*-iso8859' -bg black -fg white -x 480 -y 880 -w 850 -h 20 -ta l -e ''"
 
 myXPConfig = defaultXPConfig
     {
@@ -123,7 +115,8 @@ manageHook' = composeAll [ (doF W.swapDown)
 	    , className =? "VLC (XVideo output)"  --> doCenterFloat 
 	    , title     =? "Save a Bookmark"      --> doFloat
 	    , title     =? "Add-ons"              --> doFloat
-	    , className =? "Transmission"         --> doShift "Torrent"
+	    , className =? "Transmission"         --> doShift "TORRENT"
+	    , className =? "Uzbl"                 --> doShift "INTERWEBS"
 	    ]
 
 layoutHook' = customLayout 
@@ -138,7 +131,7 @@ borderWidth' = 2
  
 normalBorderColor', focusedBorderColor' :: String
 normalBorderColor'  = "#000000"
-focusedBorderColor' = "#3579A8"
+focusedBorderColor' = "#000000" --"#3579A8"
  
 -- workspaces
 workspaces' :: [WorkspaceId]
@@ -161,7 +154,7 @@ searchEngineMap method = M.fromList $
        , ((0, xK_r), method $ S.searchEngine "AUR" "http://aur.archlinux.org/packages.php?O=0&L=0&C=0&K=")
        , ((0, xK_a), method $ S.searchEngine "archwiki" "http://wiki.archlinux.org/index.php/Special:Search?search=")
 	, ((0, xK_p), method $ S.searchEngine "thepiratebay" "http://thepiratebay.org/search/" )
-        , ((0, xK_n), method $ S.searchEngine "mininova" "http://www.mininova.org/search" )
+        , ((0, xK_n), method $ S.searchEngine "mininova" "http://www.mininova.org/search=" )
 	, ((0, xK_i), method $ S.searchEngine "isohunt" "http://www.isohunt.com/" )
         ]
  
@@ -169,20 +162,19 @@ searchEngineMap method = M.fromList $
 customLayout =  smartBorders . avoidStruts $ funkyhack  lays
   where
     tiled = ResizableTall 1 (2/100) (1/2) []
-    funkyhack = onWorkspaces ["IRC"] (tabbed shrinkText myTheme |||  Mirror tiled ||| Full)
+    funkyhack = onWorkspaces ["IRC", "INTERWEBS"] (tabbed shrinkText myTheme ||| Mirror tiled ||| Full)
     lays = spiral (1 % 1) ||| smartBorders Circle ||| tiled ||| Mirror tiled ||| Mag.magnifier Grid ||| smartBorders (Mirror tiled) ||| (reflectHoriz tiled)
   
 myTheme = defaultTheme { decoHeight = 16
-                        , activeColor = "#a6c292"
-		        , activeBorderColor = "#a6c292"
-			, activeTextColor = "#000000"
+                        , activeColor = "#AA9DCF"
+		        , activeBorderColor = "#AA9DCF"
+			, activeTextColor = "#212121"
 	                , inactiveBorderColor = "#000000"
 		        }
-------------------------------------------------
+------------------------------------------------------------------------------
 -- Terminal --
 terminal' :: String
 terminal' = "urxvt"
- 
 -------------------------------------------------------------------------------
 -- Keys/Button bindings --
 -- modmask

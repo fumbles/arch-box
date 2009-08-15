@@ -55,8 +55,8 @@ import XMonad.Layout.Tabbed
 ------------------------------------------------------------------------------- 
 -- Main --
 main = do 
-              pipe1 <- spawnPipe "dzen2 -bg black -fg red -ta l -w 920 -h 20 "
-	      mpdpipe <- spawnPipe "~/dzen_mpd"
+              pipe1 <- spawnPipe "dzen2 -bg black -fg red -ta l -h 20 " --w 920
+	      --mpdpipe <- spawnPipe "~/dzen_mpd"
 	      conkyBarPipe <- spawnPipe myConkyBar
 	      xmonad $ withUrgencyHook dzenUrgencyHook defaultConfig {
               workspaces = workspaces'
@@ -111,7 +111,7 @@ manageHook' = composeAll [ (doF W.swapDown)
 	    , manageDocks 
 	    , className =? "OpenOffice.org 3.1"   --> doShift "CODE II"
 	    , className =? "Gimp"                 --> doFloat
-	    , className =? "Shiretoko"            --> doShift "INTERWEBS"
+	    , className =? "Shiretoko"            --> doShift "FIREFOX"
 	    , className =? "VLC (XVideo output)"  --> doCenterFloat 
 	    , title     =? "Save a Bookmark"      --> doFloat
 	    , title     =? "Add-ons"              --> doFloat
@@ -135,7 +135,7 @@ focusedBorderColor' = "#000000" --"#3579A8"
  
 -- workspaces
 workspaces' :: [WorkspaceId]
-workspaces' = ["IRC","INTERWEBS","Cal","CODE I","CODE II","TORRENT","MUSIC"]
+workspaces' = ["IRC","INTERWEBS","FIREFOX","Cal","CODE I","CODE II","TORRENT","MUSIC"]
 
 
 

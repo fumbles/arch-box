@@ -1,6 +1,6 @@
 {- xmonad.hs
  - Author: Daniel
- - Version: 0.1.0
+ - Version: 0.2.0
  -}
  
 -------------------------------------------------------------------------------
@@ -55,8 +55,8 @@ import XMonad.Layout.Tabbed
 ------------------------------------------------------------------------------- 
 -- Main --
 main = do 
-              pipe1 <- spawnPipe "dzen2 -bg black -fg red -ta l -h 20 " --w 920
-	      --mpdpipe <- spawnPipe "~/dzen_mpd"
+              pipe1 <- spawnPipe "dzen2 -bg black -fg red -w 920 -ta l -h 20 " 
+	      mpdpipe <- spawnPipe "~/dzen_mpd"
 	      conkyBarPipe <- spawnPipe myConkyBar
 	      xmonad $ withUrgencyHook dzenUrgencyHook defaultConfig {
               workspaces = workspaces'
@@ -70,7 +70,7 @@ main = do
               , manageHook = manageHook' 
               , logHook = dynamicLogWithPP $ defaultPP 
           {
-          ppCurrent           = wrap (dzfg "dark orange" box) "" . dzenColor "#AA9DCF" "#333" . pad
+          ppCurrent           = wrap (dzenColor "dark orange" "#333" box) "" . dzenColor "#AA9DCF" "#333" . pad 
           , ppOutput          = hPutStrLn pipe1 
 	  , ppVisible         = dzfg "#AA9DCF" 
           , ppHidden          = wrap (dzfg "white" emptybox) "" . dzfg "#AA9DCF"
@@ -78,7 +78,7 @@ main = do
           , ppLayout          = dzfg "#6B6382" 
           , ppSep             = " "  
           , ppWsSep           = dzfg "orange"  " " 
-          , ppUrgent          = dzenColor "#212121"  "*"
+          , ppUrgent          = dzenColor "red"  "*"
           , ppTitle           = dzenColor "cyan"  "" . trim 
           }
 }
@@ -154,7 +154,7 @@ searchEngineMap method = M.fromList $
        , ((0, xK_r), method $ S.searchEngine "AUR" "http://aur.archlinux.org/packages.php?O=0&L=0&C=0&K=")
        , ((0, xK_a), method $ S.searchEngine "archwiki" "http://wiki.archlinux.org/index.php/Special:Search?search=")
 	, ((0, xK_p), method $ S.searchEngine "thepiratebay" "http://thepiratebay.org/search/" )
-        , ((0, xK_n), method $ S.searchEngine "mininova" "http://www.mininova.org/search=" )
+        , ((0, xK_n), method $ S.searchEngine "mininova" "http://www.mininova.org/search/?search=")
 	, ((0, xK_i), method $ S.searchEngine "isohunt" "http://www.isohunt.com/" )
         ]
  
@@ -199,6 +199,7 @@ keys' conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
     , ((modMask .|. shiftMask, xK_a	), spawn "urxvt -e /home/daniel/bin/ssinfo.pl")
     , ((0, 		       xK_Print	), spawn "scrot")
     , ((controlMask .|. modMask, xK_g	), spawn "/home/daniel/bin/goodsong")
+    , ((shiftMask .|. modMask, xK_u   ), spawn "uzbl")
 	--Volume controls
      , ((modMask 		, xK_Prior), spawn "amixer sset Master 1+")
      , ((modMask		, xK_Next), spawn "amixer sset Master 1-")

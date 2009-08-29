@@ -87,7 +87,7 @@ main = do
                  box = "^p(;+7)^r(5x5)^p(+2;-7)"
 
 ------------------------------------------------------------------------------
--- conky-
+-- conky-'-*-terminus-*-*-*-*-12-*-*-*-*-*-iso8859'
 myConkyBar :: String
 myConkyBar = "sleep 1 && conky -c ~/.conkyrc1 | dzen2 -fn '-*-terminus-*-*-*-*-12-*-*-*-*-*-iso8859' -bg black  -fg white -x 0 -y 880 -w 1500 -h 20 -ta l -e '' "
 
@@ -141,7 +141,7 @@ workspaces' = ["IRC","INTERWEBS","FIREFOX","Cal","CODE I","CODE II","TORRENT","M
 
 
 
---Search engines to be selected : [google (g), wikipedia (w) , youtube (y) , maps (m), dictionary (d) , wikipedia (w), bbs (b) ,aur (r), wiki (a) , TPB (t), mininova (n), isohunt (i) ]
+--Search engines to be selected : [google (g), wikipedia (w) , youtube (y) , maps (m), dictionary (d) , wikipedia (w), bbs (b) ,aur (r), wiki (a) , TPB (p), mininova (n), isohunt (i) ]
 --keybinding: hit mod + s + <searchengine>
 
 searchEngineMap method = M.fromList $

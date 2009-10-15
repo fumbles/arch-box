@@ -1,0 +1,8 @@
+#!/bin/bash
+
+##same conky as in my xmonad but for other wm's /de's
+
+while true; do
+	sleep 1 && conky -c ~/.conkyrc1 | dzen2 -fn '-*-terminus-*-*-*-*-12-*-*-*-*-*-iso8859' -bg black  -fg white -x 0 -y 880 -w 1500 -h 20 -ta l -e ''
+
+done

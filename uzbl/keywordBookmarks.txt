@@ -1,0 +1,43 @@
+http://www.google.com/ google Google
+http://xkcd.com/ xkcd xkcd - A Webcomic - Branding
+http://www.2600.com/code/ 2600 2600 - Code Repository
+http://www.foxnews.com/ foxnews Breaking News | Latest News | Current News - FOXNews.com
+http://slashdot.org/ slashdot Slashdot Stories (10)
+http://www.uzbl.org/ uzbl.org Uzbl - a browser that adheres to the unix philosophy.
+http://www.geekherocomic.com/ geekherocomic Geek Hero Webcomic
+http://www.dumblittleman.com/ dumb Dumb Little Man - Tips for Life
+http://oswatershed.org/ OS_ranking Open Source Watershed
+http://tools.pingdom.com/ Uptest Pingdom Tools
+http://lifehacker.com/tag/linux/ lifehacker Linux - Lifehacker
+http://www.realworldhaskell.org/blog/ haskell Real World Haskell
+http://uncyclopedia.wikia.com/wiki/Ubuntu ubuntu Ubuntu - Uncyclopedia, the content-free encyclopedia
+http://dzen.geekmode.org/wiki/wiki.cgi/-main/DzenIrssiNotify dzen-notify DzenIrssiNotify
+http://xmonad.wordpress.com/2008/09/14/new-xmonad-website-launched/ xmonad-wordpress New xmonad website launched « xmonad
+http://www.cssjuice.com/25-rounded-corners-techniques-with-css/ css-whatnot CSS Juice - Design, Tutorial, Showcases, and more
+https://www.editdns.net/index.php editdns EditDNS - Free DNS Hosting
+https://www.dyndns.com/account/ dydns DynDNS.com - My Account
+http://workshop.ghost1227.com/ ghost1227 Ghost1227's Desktop Workshop
+http://www.godaddy.com/ godaddy Domain Names, Web Hosting and SSL Certificates - Go Daddy
+http://www.web-source.net/html_codes_chart.htm html-code HTML Tags / Codes / Web Page Design
+http://kuler.adobe.com/ color-theory kuler
+http://www.smashingmagazine.com/2008/05/29/applying-divine-proportion-to-web-design/ divine-color-theory Applying Divine Proportion To Your Web Designs | How-To | Smashing Magazine
+http://itt-tech.edu/ itt-tech ITT Tech Offers an Education For The Future
+https://mywalmart.com/cleartrust/ct_logon_en.html mywalmart myWalmart.com - Associate Login
+http://www.phoronix.com/scan.php?page=article&item=arch_200908_benchmarks&num=1 arch-benchmark [Phoronix] Arch Linux 2009.08 Benchmarks
+http://howto.wired.com/wiki/Build_your_own_botnet_with_open_source_software botnet Build your own botnet with open source software - Wired How-To Wiki
+http://t3hwiz0rd.com/ thewizord.com T3hWiz0rd
+http://niallohiggins.com/ nialloblog Niall's Weblog
+http://arch-netbsd.org/ arch-netbsd Arch/NetBSD Userland Porting Project
+http://www.cprogramming.com/ c C programming.com - Your Resource for C and C++ Programming
+http://computer.howstuffworks.com/c2.htm cprogramming HowStuffWorks "How C Programming Works"
+http://imgur.com/j9wrB.jpg solarpower! j9wrB.jpg (1000x753 pixels)
+http://hpaste.org/fastcgi/hpaste.fcgi/new hpaste New Paste - hpaste
+http://hackie.blog.tut.by/2009/09/02/xmonad-and-multiple-language-layouts/ xmonad_keymaps main :: IO () » Архив блога » xmonad and multiple language layouts
+http://www.google.com/reader/view/ google_reader Google Reader (321)
+http://gundam00videos.blogspot.com/2009/03/gundam-00-season-2-episode-25-revival.html Gundam00videos Mobile Suit Gundam 00 Online And Gundam Unicorn Streaming Videos Gundam 00 And Gundam Unicorn: Gundam 00 Season 2 Episode 25 - "Revival"
+http://forums.animesuki.com/showthread.php?t=85479| gundam_forum Gundam 00 Movie - Expectations and Speculation - AnimeSuki Forum
+http://www.vgchartz.com/forum/thread.php?id=85381 linux_myths Microsoft training BestBuy employees on Linux, lol on VGChartz.com
+https://www.google.com/a/wavesandbox.com/ServiceLogin?service=wave&passive=true&nui=1&continue=https%3A%2F%2Fwave.google.com%2Fa%2Fwavesandbox.com%2F wave_login Wave Sandbox
+http://cad-comic.com/comic.php cad_comic Ctrl+Alt+Del
+http://www.thinkgeek.com/tshirts-apparel/unisex/generic/2891/?cpg=ab thinkgeek ThinkGeek :: Caffeine Molecule
+http://www.zazzle.co.uk/arch_linux_only_45_obsolete_tshirt-235346844101930842 zazzle Arch Linux: Only 45% Obsolete Tee Shirt from Zazzle.co.uk

@@ -55,7 +55,7 @@ import XMonad.Layout.Tabbed
 ------------------------------------------------------------------------------- 
 -- Main --
 main = do 
-              pipe1 <- spawnPipe "dzen2 -bg black -fg red -w 920 -ta l -h 20 " 
+              pipe1 <- spawnPipe "dzen2 -bg black -fg red -w 920 -ta l -h 20 -fn 'Terminus:pixelsize=12'" 
 	      mpdpipe <- spawnPipe "~/dzen_mpd"
 	      conkyBarPipe <- spawnPipe myConkyBar
 	      xmonad $ withUrgencyHook dzenUrgencyHook defaultConfig {
@@ -89,8 +89,8 @@ main = do
 ------------------------------------------------------------------------------
 -- conky-'-*-terminus-*-*-*-*-12-*-*-*-*-*-iso8859'
 myConkyBar :: String
-myConkyBar = "sleep 1 && conky -c ~/.conkyrc1 | dzen2 -fn '-*-terminus-*-*-*-*-12-*-*-*-*-*-iso8859' -bg black  -fg white -x 0 -y 880 -w 1500 -h 20 -ta l -e '' "
-
+myConkyBar = "sleep 1 && conky -c ~/.conkyrc1 | dzen2 -fn 'Terminus:pixelsize=12' -bg black  -fg white -x 0 -w 1500 -h 20 -y 880 -ta l -e ' ' "
+--  a-*-terminus-*-*-*-*-12-*-*-*-*-*-iso8859
 myXPConfig = defaultXPConfig
     {
   font = "-*-terminus-*-*-*-*-12-*-*-*-*-*-*-u"
@@ -135,7 +135,7 @@ focusedBorderColor' = "#000000" --"#3579A8"
  
 -- workspaces
 workspaces' :: [WorkspaceId]
-workspaces' = ["IRC","INTERWEBS","FIREFOX","Cal","CODE I","CODE II","TORRENT","MUSIC"]
+workspaces' = ["IRC","INTERWEBS","FIREFOX","CODE I","CODE II","TORRENT"]
 
 
 
@@ -190,8 +190,6 @@ keys' conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
     , ((modMask .|. shiftMask, xK_p     ), shellPrompt myXPConfig)
     , ((modMask ,                  xK_s ), SM.submap $ searchEngineMap $ S.promptSearch myXPConfig)
     , ((modMask .|. shiftMask , xK_s ), SM.submap $ searchEngineMap $ S.selectSearch)
-    , ((modMask .|. shiftMask, xK_a	), spawn "urxvt -e alsamixer")
-    , ((modMask .|. shiftMask, xK_m	), spawn "urxvt  -e ncmpcpp")
     , ((modMask .|. shiftMask, xK_f	), spawn "firefox")
   , ((modMask .|. shiftMask, xK_t	), spawn "thunar")
     , ((controlMask .|. mod1Mask, xK_l), spawn "gnome-screensaver-command --lock")
@@ -200,6 +198,9 @@ keys' conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
     , ((0, 		       xK_Print	), spawn "scrot")
     , ((controlMask .|. modMask, xK_g	), spawn "/home/daniel/bin/goodsong")
     , ((shiftMask .|. modMask, xK_u   ), spawn "uzbl")
+    , ((mod3Mask                , xK_e    ), spawn "set_kb_map 0") --en_us
+    , ((mod3Mask                , xK_d    ), spawn "set_kb_map 1") -- dvorak
+    , ((mod3Mask                , xK_r    ), spawn "set_kb_map 2") --ru
 	--Volume controls
      , ((modMask 		, xK_Prior), spawn "amixer sset Master 1+")
      , ((modMask		, xK_Next), spawn "amixer sset Master 1-")
